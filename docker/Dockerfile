@@ -9,6 +9,7 @@ LABEL "description"="javacontainer-minimal is BusyBox based docker container wit
 #ARG JAVA_VERSION_MINOR
 #ARG JAVA_BUILD
 ENV JAVA_HOME_HOME="/usr/lib/jvm" \
+    JAVA_DIST_TYPE=${JAVA_DIST_TYPE:-jre} \
     JAVA_VERSION_MAJOR=${JAVA_VERSION_MAJOR:-8} \
     JAVA_VERSION_MINOR=${JAVA_VERSION_MINOR:-66} \
     JAVA_BUILD=${JAVA_BUILD:-17}
@@ -24,17 +25,17 @@ RUN chmod 755 /bin/ssl_helper
 RUN mkdir -p /tmp/install
 WORKDIR "/tmp/install"
 
-ADD http://mirrors.kernel.org/ubuntu/pool/main/g/gcc-5/gcc-5-base_5.2.1-22ubuntu2_amd64.deb /tmp/install
+ADD http://ge.archive.ubuntu.com/ubuntu/pool/main/g/gcc-5/gcc-5-base_5.2.1-22ubuntu2_amd64.deb /tmp/install
 RUN ar x *.deb
 RUN cd / && tar xJf /tmp/install/data.tar.xz
 RUN rm -f /tmp/install/*
 
-ADD http://mirrors.kernel.org/ubuntu/pool/main/g/gcc-5/libgcc1_5.2.1-22ubuntu2_amd64.deb /tmp/install
+ADD http://ge.archive.ubuntu.com/ubuntu/pool/main/g/gcc-5/libgcc1_5.2.1-22ubuntu2_amd64.deb /tmp/install
 RUN ar x *.deb
 RUN cd / && tar xJf /tmp/install/data.tar.xz
 RUN rm -f /tmp/install/*
 
-ADD http://mirrors.kernel.org/ubuntu/pool/main/g/glibc/libc6_2.21-0ubuntu4_amd64.deb /tmp/install
+ADD http://ge.archive.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.21-0ubuntu4_amd64.deb /tmp/install
 RUN ar x *.deb
 RUN cd / && tar xzf /tmp/install/data.tar.gz
 RUN rm -f /tmp/install/*
