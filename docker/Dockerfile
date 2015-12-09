@@ -18,7 +18,7 @@ ENV JAVA_HOME="$JAVA_HOME_HOME/${JAVA_DIST_TYPE}1.${JAVA_VERSION_MAJOR}.0_${JAVA
 
 # download ssl_helper for wget to handle https
 ADD https://busybox.net/downloads/binaries/ssl_helper-x86_64 /bin/ssl_helper
-RUN chmod", "755", "/bin/ssl_helper
+RUN chmod 755 /bin/ssl_helper
 
 # download and install dependencies
 RUN mkdir -p /tmp/install
