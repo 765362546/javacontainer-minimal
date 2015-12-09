@@ -1,5 +1,5 @@
 group 'sunnyone'
-version 'jre8'
+version 'jdk8'
 
 buildscript {
     repositories { jcenter() }
