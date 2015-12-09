@@ -43,7 +43,6 @@ RUN rm -f /tmp/install/*
 # download java package
 RUN mkdir -p $JAVA_HOME_HOME
 WORKDIR "$JAVA_HOME_HOME"
-RUN echo $JAVA_PACKAGE_URL
 RUN wget --no-check-certificate --header 'Cookie: oraclelicense=a' $JAVA_PACKAGE_URL
 
 # unpack and register java
