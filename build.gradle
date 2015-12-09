@@ -1,8 +1,26 @@
-group 'name.khondar.dockerhub'
-version '1.0-SNAPSHOT'
+group 'sunnyone'
+version 'jre8'
+
+buildscript {
+    repositories { jcenter() }
+    dependencies {
+        classpath 'se.transmode.gradle:gradle-docker:1.2'
+    }
+}
+
+apply plugin: 'application'
+apply plugin: 'docker'
+
+mainClassName = 'nonexistent'
+
+task javacontainerMinimalDocker(type: Docker) {
+    dockerfile = file('docker/Dockerfile')
+}
+
+assemble.dependsOn javacontainerMinimalDocker
 
 task wrapper(type: Wrapper) {
-  gradleVersion = '2.5'
-  distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
+    gradleVersion = '2.5'
+    distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
 }
 
