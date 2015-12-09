@@ -9,6 +9,7 @@ LABEL "description"="javacontainer-minimal is BusyBox based docker container wit
 #ARG JAVA_VERSION_MINOR
 #ARG JAVA_BUILD
 ENV JAVA_HOME_HOME="/usr/lib/jvm" \
+    JAVA_DIST_TYPE=${JAVA_DIST_TYPE:-jre} \
     JAVA_VERSION_MAJOR=${JAVA_VERSION_MAJOR:-8} \
     JAVA_VERSION_MINOR=${JAVA_VERSION_MINOR:-66} \
     JAVA_BUILD=${JAVA_BUILD:-17}
@@ -42,6 +43,7 @@ RUN rm -f /tmp/install/*
 # download java package
 RUN mkdir -p $JAVA_HOME_HOME
 WORKDIR "$JAVA_HOME_HOME"
+RUN echo $JAVA_PACKAGE_URL
 RUN wget --no-check-certificate --header 'Cookie: oraclelicense=a' $JAVA_PACKAGE_URL
 
 # unpack and register java
