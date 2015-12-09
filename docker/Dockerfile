@@ -4,7 +4,7 @@ MAINTAINER Vadym S. Khondar <vadym@khondar.name>
 LABEL "description"="javacontainer-minimal is BusyBox based docker container with minimal changes to make installed Java (JRE or JDK) run."
 
 # setup java installation parameters
-ARG JAVA_DIST_TYPE="jre"
+ARG JAVA_DIST_TYPE="jdk"
 ARG JAVA_VERSION_MAJOR
 ARG JAVA_VERSION_MINOR
 ARG JAVA_BUILD
