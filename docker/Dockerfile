@@ -52,4 +52,3 @@ RUN ln -s $JAVA_HOME/bin/java /bin
 # cleanup
 RUN rm ${JAVA_DIST_TYPE}-${JAVA_VERSION}-linux-x64.tar.gz
 # end
-:
