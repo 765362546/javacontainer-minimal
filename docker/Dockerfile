@@ -25,17 +25,17 @@ RUN chmod 755 /bin/ssl_helper
 RUN mkdir -p /tmp/install
 WORKDIR "/tmp/install"
 
-ADD http://ge.archive.ubuntu.com/ubuntu/pool/main/g/gcc-5/gcc-5-base_5.2.1-22ubuntu2_amd64.deb /tmp/install
+ADD http://ge.archive.ubuntu.com/ubuntu/pool/main/g/gcc-5/gcc-5-base_5.2.1-22ubuntu2_amd64.deb /tmp/install/
 RUN ar x *.deb
 RUN cd / && tar xJf /tmp/install/data.tar.xz
 RUN rm -f /tmp/install/*
 
-ADD http://ge.archive.ubuntu.com/ubuntu/pool/main/g/gcc-5/libgcc1_5.2.1-22ubuntu2_amd64.deb /tmp/install
+ADD http://ge.archive.ubuntu.com/ubuntu/pool/main/g/gcc-5/libgcc1_5.2.1-22ubuntu2_amd64.deb /tmp/install/
 RUN ar x *.deb
 RUN cd / && tar xJf /tmp/install/data.tar.xz
 RUN rm -f /tmp/install/*
 
-ADD http://ge.archive.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.21-0ubuntu4_amd64.deb /tmp/install
+ADD http://ge.archive.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.21-0ubuntu4_amd64.deb /tmp/install/
 RUN ar x *.deb
 RUN cd / && tar xzf /tmp/install/data.tar.gz
 RUN rm -f /tmp/install/*
@@ -52,3 +52,4 @@ RUN ln -s $JAVA_HOME/bin/java /bin
 # cleanup
 RUN rm ${JAVA_DIST_TYPE}-${JAVA_VERSION}-linux-x64.tar.gz
 # end
+:
