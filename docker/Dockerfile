@@ -22,8 +22,15 @@ ADD https://busybox.net/downloads/binaries/ssl_helper-x86_64 /bin/ssl_helper
 RUN chmod 755 /bin/ssl_helper
 
 # download and install dependencies
+RUN mkdir -p /usr/bin && ln -s /bin/env /usr/bin
 RUN mkdir -p /tmp/install
 WORKDIR "/tmp/install"
+
+ADD http://archive.ubuntu.com/ubuntu/pool/universe/b/bash/bash-static_4.3-14ubuntu1_amd64.deb /tmp/install
+RUN ar x *.deb
+RUN cd / && tar xJf /tmp/install/data.tar.xz
+RUN ln -s /bin/bash-static /bin/bash
+RUN rm -f /tmp/install/*
 
 ADD http://archive.ubuntu.com/ubuntu/pool/main/g/gcc-5/gcc-5-base_5.2.1-22ubuntu2_amd64.deb /tmp/install/
 RUN ar x *.deb
@@ -39,8 +46,6 @@ ADD http://archive.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.21-0ubuntu4_amd64
 RUN ar x *.deb
 RUN cd / && tar xzf /tmp/install/data.tar.gz
 RUN rm -f /tmp/install/*
-
-RUN ln -s /bin/sh /bin/bash
 
 # download java package
 RUN mkdir -p $JAVA_HOME_HOME
