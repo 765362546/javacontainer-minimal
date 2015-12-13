@@ -26,36 +26,33 @@ RUN mkdir -p /usr/bin && ln -s /bin/env /usr/bin
 RUN mkdir -p /tmp/install
 WORKDIR "/tmp/install"
 
-ADD http://archive.ubuntu.com/ubuntu/pool/universe/b/bash/bash-static_4.3-14ubuntu1_amd64.deb /tmp/install
-RUN ar x *.deb
-RUN cd / && tar xJf /tmp/install/data.tar.xz
-RUN ln -s /bin/bash-static /bin/bash
-RUN rm -f /tmp/install/*
+ADD http://archive.ubuntu.com/ubuntu/pool/universe/b/bash/bash-static_4.3-14ubuntu1_amd64.deb /tmp/install/
+RUN ar x *.deb && \
+    cd / && tar xJf /tmp/install/data.tar.xz && \
+    ln -s /bin/bash-static /bin/bash && \
+    rm -f /tmp/install/*
 
 ADD http://archive.ubuntu.com/ubuntu/pool/main/g/gcc-5/gcc-5-base_5.2.1-22ubuntu2_amd64.deb /tmp/install/
-RUN ar x *.deb
-RUN cd / && tar xJf /tmp/install/data.tar.xz
-RUN rm -f /tmp/install/*
+RUN ar x *.deb && \
+    cd / && tar xJf /tmp/install/data.tar.xz && \
+    rm -f /tmp/install/*
 
 ADD http://archive.ubuntu.com/ubuntu/pool/main/g/gcc-5/libgcc1_5.2.1-22ubuntu2_amd64.deb /tmp/install/
-RUN ar x *.deb
-RUN cd / && tar xJf /tmp/install/data.tar.xz
-RUN rm -f /tmp/install/*
+RUN ar x *.deb && \
+    cd / && tar xJf /tmp/install/data.tar.xz && \
+    rm -f /tmp/install/*
 
 ADD http://archive.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.21-0ubuntu4_amd64.deb /tmp/install/
-RUN ar x *.deb
-RUN cd / && tar xzf /tmp/install/data.tar.gz
-RUN rm -f /tmp/install/*
+RUN ar x *.deb && \
+    cd / && tar xzf /tmp/install/data.tar.gz && \
+    rm -f /tmp/install/*
 
-# download java package
+# download, unpack and register Oracle Java
 RUN mkdir -p $JAVA_HOME_HOME
 WORKDIR "$JAVA_HOME_HOME"
-RUN wget --no-check-certificate --header 'Cookie: oraclelicense=a' $JAVA_PACKAGE_URL
 
-# unpack and register java
-RUN tar xzf ${JAVA_DIST_TYPE}-${JAVA_VERSION}-linux-x64.tar.gz
-RUN ln -s $JAVA_HOME/bin/java /bin
-
-# cleanup
-RUN rm ${JAVA_DIST_TYPE}-${JAVA_VERSION}-linux-x64.tar.gz
+RUN wget --no-check-certificate --header 'Cookie: oraclelicense=a' $JAVA_PACKAGE_URL && \
+    tar xzf ${JAVA_DIST_TYPE}-${JAVA_VERSION}-linux-x64.tar.gz && \
+    ln -s $JAVA_HOME/bin/java /bin && \
+    rm ${JAVA_DIST_TYPE}-${JAVA_VERSION}-linux-x64.tar.gz
 # end
