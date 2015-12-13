@@ -40,6 +40,8 @@ RUN ar x *.deb
 RUN cd / && tar xzf /tmp/install/data.tar.gz
 RUN rm -f /tmp/install/*
 
+RUN ln -s /bin/sh /bin/bash
+
 # download java package
 RUN mkdir -p $JAVA_HOME_HOME
 WORKDIR "$JAVA_HOME_HOME"
